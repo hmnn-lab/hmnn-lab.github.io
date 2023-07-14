@@ -27,22 +27,36 @@ async function getData(url) {
 
         persondata_string += `            <div class="team-descr font-alt">
                         <div class="team-item">
-                            <div class="team-name"><h4>${person['Name']}</h4></div>
-                            <div class="team-role"><h5>${person['Role']}</h5></div>
-                            <div class="role-dates"><h5><i class="fa fa-fw"></i>&nbsp;${person['Dates']}</h5></div>`
-
+                            <div class="team-name"><h3 style="margin-bottom:0;">${person['Name']}</h3></div>
+                            <div class="team-role"><h4 style="margin-top:0; margin-bottom:0;">${person['Role']}</h4></div>`
+        
         if (person.hasOwnProperty("CurrentPosition") && person['CurrentPosition'] != "") {
-            persondata_string += `<div class="team-role"><h5>Current: ${person['CurrentPosition']}</h5></div>`
+
+            if (person.hasOwnProperty("Dates") && person['Dates'] != "") {
+                persondata_string += `<div class="role-dates"><h4 style="margin-top:0; margin-bottom:0;"><i class="fa fa-fw"></i>&nbsp;${person['Dates']}</h4></div>`
+                persondata_string += `<div class="team-role"><h5 style="margin-top:0; margin-bottom:0;">Current: ${person['CurrentPosition']}</h5></div>`
+            }
+
+            else {
+                persondata_string += `<div class="team-role"><h5 style="margin-top:0;">Current: ${person['CurrentPosition']}</h5></div>`
+            }
+        }
+
+        else if (person.hasOwnProperty("Dates") && person['Dates'] != "") {
+            persondata_string += `<div class="role-dates"><h4 style="margin-top:0;"><i class="fa fa-fw"></i>&nbsp;${person['Dates']}</h4></div>`
         }
         
         persondata_string += `</div>
                     </div>
                 </a>
-        
-                <div class="team-item">
+                <div class="team-item">`
+
+        if (person.hasOwnProperty("Email") && person['Email'] != "") {
+            persondata_string += `
                     <a href="mailto:${person['Email']}" target="_blank">
                         <img width="25" height="25" src="hmnn-assets/icons/email-48.png">
                     </a>`
+        }
 
         if (person.hasOwnProperty("LinkedIn") && person['LinkedIn'] != "") {
             persondata_string += `&nbsp;<a href="${person['LinkedIn']}" target="_blank">
@@ -101,8 +115,8 @@ function showProfile(personname) {
     var profiledata = `
             <section class='FlexContainer'>
                 <div>
-                    <img onclick="closeProfile()" src="hmnn-assets/icons/close-32.png"
-                        style="float: right; position:relative; cursor: pointer; z-index: 2" />
+                    <img onclick="closeProfile()" src="hmnn-assets/icons/close-50.svg"
+                        style="width=30; float: right; position:relative; cursor: pointer; z-index: 2" />
                 </div>
             </section>
             <div class="person-profile">
@@ -118,10 +132,13 @@ function showProfile(personname) {
     }
 
     profiledata += `</div>
-                    <div class="team-item" style="padding:10px">
-                        <a href="mailto:${person['Email']}" target="_blank">
+                    <div class="team-item" style="padding:10px">`
+
+    if (person.hasOwnProperty("Email") && person['Email'] != "") {
+        profiledata += `<a href="mailto:${person['Email']}" target="_blank">
                             <img width="25" height="25" src="hmnn-assets/icons/email-48.png">
-                        </a>`
+                            </a>`
+    }
 
     if (person.hasOwnProperty("LinkedIn") && person['LinkedIn'] != "") {
         profiledata += `&nbsp;
@@ -148,49 +165,62 @@ function showProfile(personname) {
                 </div>
 
                 <div class="person-profile-right font-alt">
-                    <h2>${person['Name']}</h2>
-                    <hr class="divider-w mt-10 mb-20">
+                    <div class="team-name"><h2 style="margin-bottom:0;">${person['Name']}</h2></div>
+                    <hr class="divider-w mt-10 mb-10">
                     <div class="font-alt">
-                        <h4>${person['Role']}&nbsp;&nbsp;&nbsp;<i class="fa fa-fw"></i>&nbsp;${person['Dates']}</h4>
+                        <div class="team-role"><h3 style="margin-top:0; margin-bottom:0;">${person['Role']}</h3></div>`
+
+    if (person.hasOwnProperty("Dates") && person['Dates'] != "") {
+        profiledata += `<div><h4 style="margin-bottom:0;"><i class="fa fa-fw"></i>&nbsp;${person['Dates']}</h4></div>
                     </div>`
+    }
+
     if (person.hasOwnProperty("CurrentPosition") && person['CurrentPosition'] != "") {
         profiledata += `<div class="font-alt">
                         <h4>Current: ${person['CurrentPosition']}</h4>
                     </div>`
     }
 
-    profiledata += `<br>
-                    <h4>About</h4>
-                    <hr class="divider-w mt-10 mb-20">
-                    ${person['Description']}`
+    profiledata += `<h3 style="color:black;">About</h3>
+                    <hr class="divider-w mt-10 mb-10">
+                    <p>${person['Description']}</p>`
 
     if (person.hasOwnProperty("GraphicalAbstract") && person['GraphicalAbstract'] != "") {
-        profiledata += `<br><br>
-                    <img style="display: block" width="100%"
+        profiledata += `<img style="display: block" width="100%"
                         src="${person['GraphicalAbstract']}">`
     }
     
     if (person.hasOwnProperty("Publications") && person['Publications'] != "") {
-        profiledata += `<br><br>
-                    <h4>Publications</h4>
-                    <hr class="divider-w mt-10 mb-20">
-                    ${person['Publications']}` 
+        profiledata += `<h3 style="color:black;">Publications</h3>
+                    <hr class="divider-w mt-10 mb-10">
+                    <p>${person['Publications']}</p>`
     }
+
+    dissertation = false;
 
     if (person.hasOwnProperty("DissertationTitle") && person['DissertationTitle'] != "") {
-        profiledata += `<br><br>
-                <h4>Dissertation </h4>
-                <hr class="divider-w mt-10 mb-20">
-                ${person['DissertationTitle']}`
+        dissertation = true;
+        profiledata += `<h3 style="color:black;">Dissertation</h3>
+                <hr class="divider-w mt-10 mb-10">
+                <p><strong>Title:</strong> ${person['DissertationTitle']}`
     }
 
+    
+
     if (person.hasOwnProperty("DissertationLink") && person['DissertationLink'] != "") {
-        profiledata += `<br>
-        <a href="${person['DissertationLink']}" target="_blank"><img width="25" height="25" src="hmnn-assets/icons/pdf-48.png" /> Read</a>`
+        dissertation = true;
+        profiledata += `&nbsp;&nbsp;&nbsp;<a href="${person['DissertationLink']}" target="_blank"><img width="25" height="25" src="hmnn-assets/icons/pdf-48.png" /> Read</a>`
     }
+
+    if (dissertation == true) {
+        profiledata += `</p>`;
+    }
+
+
 
     profiledata +=  `</div>
             </div>`;
 
     document.querySelector("#show-profile").innerHTML = profiledata;
 }
+

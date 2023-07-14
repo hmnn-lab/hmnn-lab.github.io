@@ -7,12 +7,12 @@
   font-size: 20px; }
 
 .brand img {
-  height: 90px;
-  padding: 10px;
+  height: 110px;
+  padding: 15px;
   }
   @media (max-width: 1109px) {
     .brand img {
-      width: 70%;
+      width: 80%;
       padding: 5px; } }
 
 .site-header {
@@ -74,7 +74,7 @@
       display: block;
       position: absolute;
       right: 2rem;
-      top: 4rem; } }
+      top: 5rem; } }
 
 .nav ul li ul
 {

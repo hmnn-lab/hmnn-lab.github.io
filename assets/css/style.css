@@ -9,7 +9,7 @@ html {
 
 body {
   background: #fff;
-  font: 400 16px/1.8 "Open Sans", sans-serif;
+  font: 400 18px/1.8 "Open Sans", sans-serif;
   color: #666;
   -webkit-font-smoothing: antialiased;
 }
@@ -168,7 +168,7 @@ a,
 
 @media (max-width: 1109px) {
   .main {
-    margin-top: 100px;
+    margin-top: 130px;
   }
 }
 
@@ -931,7 +931,7 @@ blockquote {
   letter-spacing: 4px;
   text-align: center;
   font-weight: 400;
-  font-size: 30px;
+  font-size: 50px;
   color: #111;
   margin: 0 0 70px;
 }
