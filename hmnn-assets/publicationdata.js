@@ -6,10 +6,12 @@ async function getData(url) {
 
 
     json = json.sort((a, b) => {
-        if (a.Number > b.Number) {
-          return -1;
-        }
+        var x = a[Number];
+        var y = b[Number];
+        return ((x < y) ? -1 : ((x > y) ? 1 : 0));
       });
+
+    console.log(json)
 
     for (let i = 0; i < Object.keys(json).length; i++) {
         pubs = json[i];
