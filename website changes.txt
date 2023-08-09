@@ -1,0 +1,10 @@
+website changes:
+1. margin spaces reduce
+2. logo size increase
+3. make all pages google sheets
+4. funding page should have images
+5. move the people page tags to the menu; remove faculty option
+6. define gallery folder, upload all images from there
+7. remove google scholar image, only link; add orcid
+8. documentation
+9. increase loading duration
