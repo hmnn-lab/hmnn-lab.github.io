@@ -52,7 +52,7 @@
     <div id="navbar"></div>
     
     <div class="main">
-      <section class="module bg-dark-30 about-page-header" data-background="assets/images/about_bg.jpg">
+      <section class="module bg-dark-30 about-page-header" data-background="assets/images/pub_background_17.png" id="background-image">
         <div class="container">
           <div class="row">
             <div class="col-sm-6 col-sm-offset-3">
@@ -122,6 +122,25 @@
       $("#footer").load("footer.html"); 
     });
   </script> 
+  <script>
+    // Function to update the background image based on window size
+    function updateBackgroundImage() {
+      var windowWidth = window.innerWidth;
+      var backgroundImage = document.getElementById("background-image");
+  
+      if (windowWidth < 800) {
+        backgroundImage.style.backgroundImage = 'url(/assets/images/pub_background_1.jpg)';
+      } else if (windowWidth < 1100) {
+        backgroundImage.style.backgroundImage = 'url(assets/images/pub_background_2.png)';
+      } else {
+        backgroundImage.style.backgroundImage = 'url(assets/images/pub_background_3.png)';
+      }
+    }
+  
+    // Call the function when the page loads and when the window is resized
+    window.addEventListener('load', updateBackgroundImage);
+    window.addEventListener('resize', updateBackgroundImage);
+  </script>
 </body>
 
 </html>

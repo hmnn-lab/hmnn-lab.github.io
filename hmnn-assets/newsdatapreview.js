@@ -23,6 +23,9 @@ async function getPreviewData(url, count) {
 
     let $newsText = $(`<div class="alt-features-item1">${modifiedNews} <b>(${newsall['Date']})</b></div>`);
 
+    // Center-align text using CSS
+    $newsText.css('text-align', 'center');
+
     $('#news-preview').append($newsText);
   }
 }
