@@ -4,62 +4,77 @@ async function getData(url) {
 
     const json = JSON.parse(y);
 
-    // Sort the publications by year
-    const sortedJson = json.sort((a, b) => {
-        const yearA = extractYearFromCitation(a['Citation']);
-        const yearB = extractYearFromCitation(b['Citation']);
-        return yearB - yearA;
-    });
+    // Group publications by affiliation and then by year
+    const publicationsByAffiliation = groupPublicationsByAffiliation(json);
 
-    const publicationsByYear = groupPublicationsByYear(sortedJson);
+    // Sort affiliations based on the latest year
+    const sortedAffiliations = Object.keys(publicationsByAffiliation).sort((a, b) => {
+        const maxYearA = Math.max(...Object.keys(publicationsByAffiliation[a]));
+        const maxYearB = Math.max(...Object.keys(publicationsByAffiliation[b]));
+        return maxYearB - maxYearA;
+    });
 
     const $gridContainer = $('#publications-list');
 
-    const years = Object.keys(publicationsByYear).reverse();
+    sortedAffiliations.forEach((affiliation, affiliationIndex) => {
+        const affiliationPublications = publicationsByAffiliation[affiliation];
+        const $affiliationContainer = $(`<div class="affiliation-container rounded-box2 expandable"><h3>${affiliation}</h3></div>`);
 
-    years.forEach((year, index) => {
-        if (publicationsByYear.hasOwnProperty(year)) {
-            const isExpandedClass = index === 0 ? '' : ' collapsed';
-            const expandSymbol = index === 0 ? '<i class="fas fa-caret-right"></i>' : '<i class="fas fa-caret-right"></i>';
-    
+        $gridContainer.append($affiliationContainer);
+
+        const years = Object.keys(affiliationPublications).sort((a, b) => b - a);
+
+        years.forEach((year, yearIndex) => {
+            const isExpandedClass = affiliationIndex === 0 && yearIndex === 0 ? ' expanded' : ' collapsed';
+            const expandSymbol = affiliationIndex === 0 && yearIndex === 0 ? '<i class="fas fa-caret-down"></i>' : '<i class="fas fa-caret-right"></i>';
+
             const $yearTitle = $(`<div class="year-title${isExpandedClass} rounded-box"><h3>${year}</h3><span class="expand-icon">${expandSymbol}</span></div>`);
-    
-            $gridContainer.append($yearTitle);
-    
-            const $publicationsContainer = $(`<div class="publications-container${isExpandedClass}"></div>`); // Remove the initial style
-    
-            if (index === 0) {
-                $publicationsContainer.css({ 'display': 'block', 'opacity': '1' }); // Set initial style for the first year
+            const $publicationsContainer = $(`<div class="publications-container${isExpandedClass}"></div>`);
+
+            if (!(affiliationIndex === 0 && yearIndex === 0)) {
+                $publicationsContainer.hide();
             }
-    
-            const publications = publicationsByYear[year];
+
+            const publications = affiliationPublications[year];
             publications.forEach(pub => {
                 const $publication = createPublicationElement(pub);
                 $publicationsContainer.append($publication);
             });
-    
-            $gridContainer.append($publicationsContainer);
-    
-            if (index !== 0) {
-                $publicationsContainer.hide();
-            }
-    
+
+            $affiliationContainer.append($yearTitle);
+            $affiliationContainer.append($publicationsContainer);
+
             $yearTitle.click(function () {
                 $publicationsContainer.slideToggle(200);
                 const $expandIcon = $(this).find('.expand-icon');
-                const isExpanded = $publicationsContainer.hasClass('expanded');
-                $expandIcon.css('transform', isExpanded ? 'rotate(0deg)' : 'rotate(90deg)');
+                $expandIcon.html($publicationsContainer.hasClass('expanded') ? '<i class="fas fa-caret-right"></i>' : '<i class="fas fa-caret-down"></i>');
                 $publicationsContainer.toggleClass('expanded');
             });
-    
-            // Rotate the expand icon for the first year
-            if (index === 0) {
-                const $expandIcon = $yearTitle.find('.expand-icon');
-                $expandIcon.css('transform', 'rotate(90deg)');
-                $publicationsContainer.addClass('expanded'); // Ensure it's marked as expanded
+        });
+    });
+}
+
+function groupPublicationsByAffiliation(json) {
+    const publicationsByAffiliation = {};
+
+    json.forEach(pub => {
+        const affiliation = pub['AFFILIATION'];
+        const year = pub['YEAR'];
+
+        if (affiliation) {
+            if (!publicationsByAffiliation[affiliation]) {
+                publicationsByAffiliation[affiliation] = {};
             }
+
+            if (!publicationsByAffiliation[affiliation][year]) {
+                publicationsByAffiliation[affiliation][year] = [];
+            }
+
+            publicationsByAffiliation[affiliation][year].push(pub);
         }
     });
+
+    return publicationsByAffiliation;
 }
 
 function extractYearFromCitation(citation) {
@@ -73,8 +88,8 @@ function extractYearFromCitation(citation) {
 function groupPublicationsByYear(json) {
     const publicationsByYear = {};
     json.forEach(pub => {
-        const year = extractYearFromCitation(pub['Citation']);
-        if (year !== null) {
+        const year = pub['YEAR'];
+        if (year) {
             if (!publicationsByYear[year]) {
                 publicationsByYear[year] = [];
             }
@@ -86,11 +101,17 @@ function groupPublicationsByYear(json) {
 
 function createPublicationElement(pub) {
     let $publication;
+    let citText = pub['CITATION'];
+    let title = pub['TITLE'];
+
+    // Search for the mainSubject in the newsText and wrap it with <b> tags
+    let modifiedcit = citText.replace(new RegExp(title, 'g'), `<b>${title}</b>`);
+
 
     if (pub.hasOwnProperty('PDF') && pub['PDF'] !== "") {
         $publication = $(`
             <div class="grid-item font-alt" style="padding-left: 20px;">
-                <h4 style="color: black; margin-bottom: 0;">${pub['Citation']}</h4>
+                <h4 style="color: black; margin-bottom: 0;">${modifiedcit}</h4>
                 <h4 style="margin-top: 0;">
                     <a href="https://doi.org/${pub['DOI']}" target="_blank">${pub['DOI']}</a>&nbsp;&nbsp;
                     <a href="${pub['PDF']}" target="_blank">
@@ -102,7 +123,7 @@ function createPublicationElement(pub) {
     } else {
         $publication = $(`
             <div class="grid-item font-alt" style="padding-left: 20px;">
-                <h4 style="color: black; margin-bottom: 0;">${pub['Citation']}</h4>
+                <h4 style="color: black; margin-bottom: 0;">${modifiedcit}</h4>
                 <h4 style="margin-top: 0;">
                     <a href="https://doi.org/${pub['DOI']}" target="_blank">${pub['DOI']}</a>
                 </h4>

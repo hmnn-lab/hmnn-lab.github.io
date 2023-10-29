@@ -10,7 +10,7 @@ html {
 body {
   background: #fff;
   font: 400 18px/1.8 "Open Sans", sans-serif;
-  color: #666;
+  color: #6b6b6b;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -984,6 +984,11 @@ a,
   /* Add any other styling you want for the hover effect, e.g., text color */
 }
 
+.rounded-box2 {
+  background-color: #ffffff; /* Change the background color as needed */
+  border-radius: 10px; /* Adjust the border-radius value for the desired curvature */
+  padding: 10px; /* Add padding as needed */
+}
 
 
 
