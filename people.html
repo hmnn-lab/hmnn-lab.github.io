@@ -64,16 +64,15 @@
             <div class="row">
               <div class="col-sm-12">
                 <ul class="filter font-alt">
-                  <li><a class="current wow fadeInUp" href="#" data-filter="*" onclick="checkIfProfile()"><h4>All</h4></a></li>
-                  <li><a class="wow fadeInUp" href="#" data-filter=".faculty" data-wow-delay="0.1s" onclick="checkIfProfile()"><h4>Faculty</h4></a></li>
-                  <li><a class="wow fadeInUp" href="#" data-filter=".colab" data-wow-delay="0.1s" onclick="checkIfProfile()"><h4>Collaborators</h4></a></li>
-                  <li><a class="wow fadeInUp" href="#" data-filter=".postdoc" data-wow-delay="0.1s" onclick="checkIfProfile()"><h4>PostDocs</h4></a></li>
-                  <li><a class="wow fadeInUp" href="#" data-filter=".phd" data-wow-delay="0.2s" onclick="checkIfProfile()"><h4>PhD Students</h4></a></li>
-                  <li><a class="wow fadeInUp" href="#" data-filter=".masters" data-wow-delay="0.3s" onclick="checkIfProfile()"><h4>Master's Students</h4></a></li>
-                  <li><a class="wow fadeInUp" href="#" data-filter=".projectassistant" data-wow-delay="0.4s" onclick="checkIfProfile()"><h4>Project Assistants</h4></a></li>
-                  <li><a class="wow fadeInUp" href="#" data-filter=".visiting" data-wow-delay="0.5s" onclick="checkIfProfile()"><h4>Visiting Students</h4></a></li>
-                  <li><a class="wow fadeInUp" href="#" data-filter=".undergrad" data-wow-delay="0.5s" onclick="checkIfProfile()"><h4>Undergrads</h4></a></li>
-                  <li><a class="wow fadeInUp" href="#" data-filter=".alumnus" data-wow-delay="0.6s" onclick="checkIfProfile()"><h4>Alumni</h4></a></li>
+                  <li><a id="pi" class="wow fadeInUp" href="#" data-filter=".pi" data-wow-delay="0.1s" onclick="checkIfProfile()"><h4>P.I.</h4></a></li>
+                  <li><a id="postdoc" class="wow fadeInUp" href="#" data-filter=".postdoc" data-wow-delay="0.1s" onclick="checkIfProfile()"><h4>PostDocs</h4></a></li>
+                  <li><a id="phd" class="wow fadeInUp" href="#" data-filter=".phd" data-wow-delay="0.2s" onclick="checkIfProfile()"><h4>PhD Students</h4></a></li>
+                  <li><a id="masters" class="wow fadeInUp" href="#" data-filter=".masters" data-wow-delay="0.3s" onclick="checkIfProfile()"><h4>Master's Students</h4></a></li>
+                  <li><a id="projectassistant" class="wow fadeInUp" href="#" data-filter=".projectassistant" data-wow-delay="0.4s" onclick="checkIfProfile()"><h4>Project Assistants</h4></a></li>
+                  <li><a id="visiting" class="wow fadeInUp" href="#" data-filter=".visiting" data-wow-delay="0.5s" onclick="checkIfProfile()"><h4>Visiting Students</h4></a></li>
+                  <li><a id="undergrad" class="wow fadeInUp" href="#" data-filter=".undergrad" data-wow-delay="0.5s" onclick="checkIfProfile()"><h4>Undergrads</h4></a></li>
+                  <li><a id="colab" class="wow fadeInUp" href="#" data-filter=".colab" data-wow-delay="0.1s" onclick="checkIfProfile()"><h4>Collaborators</h4></a></li>
+                  <li><a id="alumnus" class="wow fadeInUp" href="#" data-filter=".alumnus" data-wow-delay="0.6s" onclick="checkIfProfile()"><h4>Alumni</h4></a></li>
                 </ul>
               </div>
             </div>
@@ -162,5 +161,33 @@
         $("#footer").load("footer.html"); 
       });
     </script> 
+    <script>
+      function handleHashChange() {
+        var hash = window.location.hash;
+        var categoryMapping = {
+            "#pi": ".pi",
+            "#postdoc": ".postdoc",
+            "#phd": ".phd",
+            "#masters": ".masters",
+            "#projectassistant": ".projectassistant",
+            "#visiting": ".visiting",
+            "#undergrad": ".undergrad",
+            "#colab": ".colab",
+            "#alumnus": ".alumnus"
+        };
+    
+        if (categoryMapping[hash]) {
+            $("a[data-filter='" + categoryMapping[hash] + "']").click();
+        }
+    }
+    
+    // Attach the event handler to the hashchange event
+    $(window).on('hashchange', handleHashChange);
+    
+    // Initial handling of the hash when the page loads
+    $(document).ready(function() {
+        handleHashChange();
+    });
+    </script>
   </body>
 </html>
