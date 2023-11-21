@@ -18,7 +18,7 @@ async function getData(url) {
 
     sortedAffiliations.forEach((affiliation, affiliationIndex) => {
         const affiliationPublications = publicationsByAffiliation[affiliation];
-        const $affiliationContainer = $(`<div class="affiliation-container rounded-box2 expandable"><h3>${affiliation}</h3></div>`);
+        const $affiliationContainer = $(`<div class="well well-sm"><h3 class="font-alt text-center" style="margin-top: 0;"><strong>${affiliation}</strong></h3></div>`);
 
         $gridContainer.append($affiliationContainer);
 
