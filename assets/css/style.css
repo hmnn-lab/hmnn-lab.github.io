@@ -688,6 +688,13 @@ a,
   font-size: 11px;
   padding: 8px 37px;
 }
+.btnnormal {
+  border-radius: 0;
+  font-family: "Roboto Condensed", sans-serif;
+  letter-spacing: 2px;
+  font-size: 11px;
+  padding: 8px 37px;
+}
 
 .btn.active.focus,
 .btn.active:focus,
