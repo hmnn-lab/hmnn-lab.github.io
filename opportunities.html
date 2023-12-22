@@ -63,53 +63,9 @@
 
       <section class="module-alternate">
         <div class="container font-alt">
-          <div class="alert alert-info" role="alert">
-            <h3 style="margin-top: 0;"><strong>Volunteer for a Study!</strong></h3>
-            <p>There is an opening for a postdoc position in the lab funded by IPDF.
-              Please write to Dr. Nivethida (dr.nivethida[at]gmail[dot]com) with your CV and a short research
-              proposal to apply.</p>
-          </div>
-          <div class="alert alert-success" role="alert">
-            <h3 style="margin-top: 0;"><strong>Opening for PostDoc!</strong></h3>
-            <p>There is an opening for a postdoc position in the lab funded by IPDF.
-              Please write to Dr. Nivethida (dr.nivethida[at]gmail[dot]com) with your CV and a short research
-              proposal to apply.</p>
-          </div>
-          <p>
-            The lab has openings for project assistants, summer interns and
-            women scientists (WOS-A). Interested candidates may contact
-            Dr. Nivethida (dr.nivethida[at]gmail[dot]com) with their CV and
-            letter of interest through email. Candidates for summer internship
-            should apply through Indian Academy of Sciences or IIT IRCC program
-            and indicate your lab choice. Those interested to pursue PhD or MTech/MSc
-            should apply formally through the procedure given by the
-            Department of Biosciences and Bioengineering, IIT Bombay.
-          </p>
-          <div>
-            <h2>Postdoctoral Positions</h2>
-            <hr class="divider-w mt-10 mb-20">
-            <p>If you are looking for a Postdoctoral Position in the area of experimental biophysics/computational
-              biology
-              and robotics. Postdocs with their own funding are always encouraged to apply.</p>
-          </div>
-          <div>
-            <h2>PhD/MTech/MSc Positions</h2>
-            <hr class="divider-w mt-10 mb-20">
-            <p>Candidates interested to pursue <a href="https://www.bio.iitb.ac.in/academics/phd-program/"
-                target="_blank">PhD</a>/<a href="https://www.bio.iitb.ac.in/academics/mtech-program/"
-                target="_blank">MTech</a>/<a href="https://www.bio.iitb.ac.in/academics/msc-program/"
-                target="_blank">MSc</a>
-              should apply formally through the procedure given by the
-              Department of Biosciences and Bioengineering, IIT Bombay.
-            </p>
-          </div>
-          <div>
-            <h2>Project/Dissertation Work Opportunities for BE/BTech/MSc/MTech Students</h2>
-            <hr class="divider-w mt-10 mb-20">
-            <p>If you are an external student and interested in completing your project work at the HMNN Lab, please
-              find the relevant information available <a
-                href="https://www.iitb.ac.in/newacadhome/ProcedurefordoingProject.pdf" target="_blank">here</a>.</p>
-          </div>
+          <ul id="highlighted-banners-list" class="list-unstyled"></ul>
+          <div id="overall-description-container"></div>
+          <div id="opportunities-list"></div>
         </div>
       </section>
       <div id="footer"></div>
@@ -135,6 +91,7 @@
   <script src="assets/lib/simple-text-rotator/jquery.simple-text-rotator.min.js"></script>
   <script src="assets/js/plugins.js"></script>
   <script src="assets/js/main.js"></script>
+  <script src="hmnn-assets/opportunities.js"></script>
   <script>
     $(function () {
       $("#navbar").load("navigation.html");
