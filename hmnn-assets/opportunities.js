@@ -50,7 +50,7 @@ function renderHighlightedBanners(banners) {
 function createOpportunityElement(opportunity) {
   const opportunityElement = document.createElement('div');
 
-  const titleElement = document.createElement('h2');
+  const titleElement = document.createElement('h3');
   titleElement.innerHTML = opportunity.title;
 
   const hrElement = document.createElement('hr');
