@@ -168,7 +168,7 @@ a,
 
 @media (max-width: 1109px) {
   .main {
-    margin-top: 130px;
+    margin-top: 40px;
   }
 }
 
@@ -682,7 +682,7 @@ a,
 --------------------------------------------------------------*/
 .btn {
   border-radius: 0;
-  font-family: "Roboto Condensed", sans-serif;
+  font-family: "Open Sans", sans-serif;
   text-transform: uppercase;
   letter-spacing: 2px;
   font-size: 11px;
@@ -690,7 +690,7 @@ a,
 }
 .btnnormal {
   border-radius: 0;
-  font-family: "Roboto Condensed", sans-serif;
+  font-family: "Open Sans", sans-serif;
   letter-spacing: 2px;
   font-size: 11px;
   padding: 8px 37px;
@@ -873,7 +873,7 @@ a,
 
 /* Forms common style */
 .form-control {
-  font-family: "Roboto Condensed", sans-serif;
+  font-family: "Open Sans", sans-serif;
   text-transform: uppercase;
   letter-spacing: 2px;
   font-size: 11px;
@@ -1052,7 +1052,7 @@ blockquote {
 }
 
 .font-alt {
-  font-family: "Albert Sans", sans-serif;
+  font-family: "Open Sans", sans-serif;
   /* text-transform: uppercase; */
   /* letter-spacing: 2px; */
 }
@@ -1075,15 +1075,14 @@ blockquote {
   letter-spacing: 4px;
   text-align: center;
   font-weight: 400;
-  font-size: 50px;
   color: #111;
   margin: 0 0 20px;
 }
-@media (max-width: 767px) {
+/* @media (max-width: 767px) {
   .module-title {
     padding-right: 300px;
   }
-}
+} */
 
 .module-subtitle {
   text-align: center;
@@ -1270,6 +1269,32 @@ Hero Slider
   -o-background-size: cover;
 }
 
+@media (min-width: 1429px) {
+  section#home .hero-slider .slides li {
+    background-position-y: 10px; /* Move the background image down by 100px */
+  }
+}
+
+@media (max-width: 1200px) {
+  section#home .hero-slider .slides li {
+    background-position-y: 60px; /* Move the background image down by 100px */
+  }
+}
+@media (max-width: 850px) {
+  section#home .hero-slider .slides li {
+    background-position-y: 100px; /* Move the background image down by 100px */
+  }
+}
+section#about {
+  padding-top: 50px;
+}
+
+/* Adjust the padding-top for screens less than 1061px wide */
+@media (max-width: 700px) {
+  section#about {
+    padding-top: 0; /* Set the padding-top to 0 for screens less than 1061px wide */
+  }
+}
 /* Caption */
 .titan-caption {
   position: relative;
@@ -1419,7 +1444,7 @@ General Styles - Owlcarousel
   border: 0;
   border-radius: 0;
   z-index: 1000;
-  font-family: "Roboto Condensed", sans-serif;
+  font-family: "Open Sans", sans-serif;
   text-transform: uppercase;
   letter-spacing: 3px;
   font-size: 11px;

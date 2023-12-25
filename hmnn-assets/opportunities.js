@@ -10,7 +10,7 @@ async function fetchData() {
 // Function to create HTML elements for each highlighted banner
 function createHighlightedBannerElement(banner) {
   const bannerElement = document.createElement('li');
-  bannerElement.className = 'alert alert-success';
+  bannerElement.className = 'alert alert-info';
 
   const titleElement = document.createElement('h3');
   titleElement.style.marginTop = '0';
@@ -22,7 +22,7 @@ function createHighlightedBannerElement(banner) {
   // Replace each occurrence of tag with corresponding URL
   banner.urlTagText.split('\n').forEach((tag, index) => {
     const url = banner.url.split('\n')[index];
-    description = description.split(tag).join(`<a href="${url}">${tag}</a>`);
+    description = description.split(tag).join(`<a href="${url}"><b>${tag}</b></a>`);
   });
 
   descriptionElement.innerHTML = description;
@@ -62,7 +62,7 @@ function createOpportunityElement(opportunity) {
   opportunity.urlTagText.split('\n').forEach((tag, index) => {
     descriptionElement.innerHTML = descriptionElement.innerHTML.replace(
       new RegExp(tag, 'g'),
-      `<a href="${opportunity.url.split('\n')[index]}" target="_blank">${tag}</a>`
+      `<a href="${opportunity.url.split('\n')[index]}" target="_blank"><b>${tag}</b></a>`
     );
   });
 
@@ -89,7 +89,7 @@ function createOverallDescriptionElement(overallDescription) {
   const descriptionElement = document.createElement('p');
   descriptionElement.innerHTML = overallDescription.description.replace(
     new RegExp(overallDescription.urlTagText, 'g'),
-    `<a href="${overallDescription.url}">${overallDescription.urlTagText}</a>`
+    `<a href="${overallDescription.url}"><b>${overallDescription.urlTagText}</b></a>`
   );
 
   return descriptionElement;

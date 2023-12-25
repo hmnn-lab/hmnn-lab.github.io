@@ -41,11 +41,14 @@ function createEventList(eventData, containerId) {
         const $detailsContainer = $('<div class="col-sm-6 col-md-4 col-lg-4">');
         const $details = $('<div class="work-details">');
 
-        // Add images to the slider if available
-        if (event.ImagePaths && event.ImagePaths.length > 0) {
+        // Check if there are images available
+        if (event.ImagePaths && event.ImagePaths.some(path => path.trim() !== '')) {
+            // Add images to the slider
             event.ImagePaths.forEach(imagePath => {
-                const $slide = $(`<li><img class="center-block" src="${imagePath}" alt="Slider Image" draggable="false"></li>`);
-                $slider.append($slide);
+                if (imagePath.trim() !== '') {
+                    const $slide = $(`<li><img class="center-block" src="${imagePath}" alt="Slider Image" draggable="false"></li>`);
+                    $slider.append($slide);
+                }
             });
 
             // Append the slides to the slider container
@@ -58,23 +61,50 @@ function createEventList(eventData, containerId) {
         // Add event details
         const $title = $(`<h3 class="work-details-title font-alt">${event.Title}</h3>`);
         const $summary = $(`<p>${event.Summary}</p>`);
-        const $locationdate = $(`<ul><li><i class="fa fa-fw"></i>&nbsp;&nbsp;${event.Location}</li><li><i class="fa fa-fw"></i>&nbsp;&nbsp;${formatDate(event.StartDate, event.EndDate)}</li></ul>`);
+        const $locationdate = $(`<ul>`);
+
+        // Add the location if available
+        if (event.Location) {
+            $locationdate.append(`<li><i class="fa fa-fw"></i>&nbsp;&nbsp;${event.Location}</li>`);
+        }
+
+        // Add the date if available
+        if (event.StartDate) {
+            $locationdate.append(`<li><i class="fa fa-fw"></i>&nbsp;&nbsp;${formatDate(event.StartDate, event.EndDate)}</li>`);
+        }
+
+        // Add the link if available
+        if (event.Link) {
+            $locationdate.append(`<li><i class="fa fa-fw"></i>&nbsp;&nbsp;<a href="${event.Link}" target="_blank">Event Link</a></li>`);
+        }
+
+        $locationdate.append(`</ul>`);
 
         // Append elements to the work details
         $details.append($title, $summary, $locationdate);
         $detailsContainer.append($details);
 
-        // Append the work details to the container
-        $container.append( $workItem, $detailsContainer);
+        // Check if there are images available before appending work item
+        if (event.ImagePaths && event.ImagePaths.some(path => path.trim() !== '')) {
+            // Append the work details to the container
+            $container.append($workItem, $detailsContainer);
 
-        // Initialize FlexSlider (assuming you've included the FlexSlider library)
-        $sliderContainer.flexslider({
-            animation: "slide",
-            controlNav: true,
-            directionNav: true,
-        });
+            // Initialize FlexSlider (assuming you've included the FlexSlider library)
+            $sliderContainer.flexslider({
+                animation: "slide",
+                controlNav: true,
+                directionNav: true,
+            });
+        } else {
+            // If no images, only append details container
+            $container.append($detailsContainer);
+        }
     });
 }
+
+// Rest of your code remains unchanged
+
+
 
 
 
@@ -82,10 +112,10 @@ $(window).on('load', async function () {
     const eventData = await getEventData("https://script.google.com/macros/s/AKfycbxl3u97VfzrPckKJqZJmukcXVzbdxCSzTSFoz10ae3_aFYE8Eo_DCmfXMvdx6jUhbSq/exec");
     console.log('Fetched eventData:', eventData);
 
-    const upcomingEvents = eventData.filter(event => isFutureDate(event.StartDate));
+    const upcomingEvents = eventData.filter(event => event.Status === 'Upcoming');
     console.log('Upcoming Events:', upcomingEvents);
 
-    const pastEvents = eventData.filter(event => !isFutureDate(event.StartDate));
+    const pastEvents = eventData.filter(event => event.Status === 'Past');
     console.log('Past Events:', pastEvents);
 
     createEventList(upcomingEvents, 'upcoming-events-container');

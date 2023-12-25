@@ -113,6 +113,7 @@
   <script src="assets/js/plugins.js"></script>
   <script src="assets/js/main.js"></script>
   <script src="hmnn-assets/publicationdata.js"></script>
+  <script src="hmnn-assets/bannerimage.js"></script>
   <script> 
       $(function(){
       $("#navbar").load("navigation.html"); 
@@ -123,25 +124,6 @@
       $("#footer").load("footer.html"); 
     });
   </script> 
-  <script>
-    // Function to update the background image based on window size
-    function updateBackgroundImage() {
-      var windowWidth = window.innerWidth;
-      var backgroundImage = document.getElementById("background-image");
-  
-      if (windowWidth < 800) {
-        backgroundImage.style.backgroundImage = 'url(/assets/images/pub_background_7.png)';
-      } else if (windowWidth < 1100) {
-        backgroundImage.style.backgroundImage = 'url(assets/images/pub_background_8.png)';
-      } else {
-        backgroundImage.style.backgroundImage = 'url(assets/images/pub_background_9.png)';
-      }
-    }
-  
-    // Call the function when the page loads and when the window is resized
-    window.addEventListener('load', updateBackgroundImage);
-    window.addEventListener('resize', updateBackgroundImage);
-  </script>
 </body>
 
 </html>

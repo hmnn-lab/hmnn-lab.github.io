@@ -79,14 +79,14 @@
         </div>
       </section>
       <div class="main">
-        <section class="module" id="about" style="padding-top: 50px; padding-bottom: 0px;">
+        <section class="module" id="about" style="padding-bottom: 0px; padding-right: 20px; padding-left: 20px;">
           <div class="container">
             <div class="row">
               <div class="col-sm col">
                 <h2 class="module-title font-alt">Welcome to HMNN Lab</h2>
                 <div class="module-subtitle font-serif" style="margin-bottom: 0px; margin-top:10px;" id="introtext"></div>
                 <div class="alt-features-item4" style="margin-bottom: 50px;">
-                  <a href="research.html" class="btnnormal btn-primary" style="font-family: 'Roboto', sans-serif; font-size: 15px;">Learn more about our Research</a>
+                  <a href="research.html" class="btnnormal btn-primary" style="font-family: 'Open Sans', sans-serif; font-size: 15px;">Learn more about our Research</a>
                 </div>
               </div>
             </div>
@@ -99,7 +99,7 @@
                   <div id="news-preview">
                   </div>
                   <div class="alt-features-item4">
-                  <a href="news.html" class="btnnormal btn-primary" style="font-family: 'Roboto', sans-serif; font-size: 15px;">View All News</a>
+                  <a href="news.html" class="btnnormal btn-primary" style="font-family: 'Open Sans', sans-serif; font-size: 15px;">View All News</a>
                   </div>
               </div>
   
@@ -174,6 +174,37 @@
     $(function(){
       $("#footer").load("footer.html"); 
     });
-  </script> 
+  </script>
+  <script>
+    $(document).ready(function() {
+      // Check the page width on load and resize
+      $(window).on('load resize', function() {
+        // Get the current page width
+        var pageWidth = $(window).width();
+        if (pageWidth > 1200) {
+          // Add a padding of 100 pixels to the top of the section
+          $('.home-section').css('height', '1061px');
+        }
+        else if ((pageWidth >500) & (pageWidth <1200)) {
+          $('.home-section').css('height', 1061+200 - (1400-pageWidth));
+        }
+        else if (pageWidth <500) {
+          $('.home-section').css('height', 1061+200 - (1400-500));
+        }
+    
+        // If the page width is more than 1428 pixels
+        //if ((pageWidth > 500) & (pageWidth < 1061)) {
+          // Add a padding of 100 pixels to the top of the section
+          //$('.home-section').css('height', pageWidth);
+        //} else if (pageWidth > 1061){
+          // Remove the padding if the page width is 1428 pixels or less
+          //$('.home-section').css('height', '1061px');
+        //}else if (pageWidth < 500){
+          // Remove the padding if the page width is 1428 pixels or less
+          //$('.home-section').css('height', '500px');
+        //}
+      });
+    });
+  </script>
   </body>
 </html>
