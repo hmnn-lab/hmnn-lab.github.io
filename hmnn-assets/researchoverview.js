@@ -32,10 +32,10 @@ async function getData(url) {
             let $row = $('<div class="row">');
 
             // Column for the image
-            let $imageCol = $(`<div class="col-sm-6 col-md-5 col-lg-5"><img src="${research['Infographic']}" alt="Title of Image" /></div>`);
+            let $imageCol = $(`<div style="padding-left: 15px; padding-right: 15px;"><img src="${research['Infographic']}" alt="Title of Image" /></div>`);
 
             // Column for the details
-            let $detailsCol = $('<div class="col-sm-6 col-md-7 col-lg-7"><div class="work-details"></div></div>');
+            let $detailsCol = $('<div style="padding-left: 15px; padding-right: 15px;"><div class="work-details"></div></div>');
 
             // Title
             let $title = $(`<h3 class="work-details-title font-alt">${research['Title']}</h3>`);

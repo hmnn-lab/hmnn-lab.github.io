@@ -4,11 +4,14 @@ function updateBackgroundImage() {
   var backgroundImage = document.getElementById("background-image");
 
   if (windowWidth < 800) {
-    backgroundImage.style.backgroundImage = 'url(/assets/images/pub_background_10.png)';
+    backgroundImage.style.backgroundImage = 'url(/assets/images/pub_background_13.png)';
+    backgroundImage.style.paddingTop = '200px';
   } else if (windowWidth < 1100) {
-    backgroundImage.style.backgroundImage = 'url(assets/images/pub_background_11.png)';
+    backgroundImage.style.backgroundImage = 'url(assets/images/pub_background_14.png)';
+    backgroundImage.style.paddingTop = '200px';
   } else {
-    backgroundImage.style.backgroundImage = 'url(assets/images/pub_background_12.png)';
+    backgroundImage.style.backgroundImage = 'url(assets/images/pub_background_15.png)';
+    backgroundImage.style.paddingTop = '140px';
   }
 }
 

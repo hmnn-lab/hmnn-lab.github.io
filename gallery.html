@@ -38,6 +38,7 @@
   <link href="assets/lib/owl.carousel/dist/assets/owl.theme.default.min.css" rel="stylesheet" />
   <link href="assets/lib/magnific-popup/dist/magnific-popup.css" rel="stylesheet" />
   <link href="assets/lib/simple-text-rotator/simpletextrotator.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css">
   <!-- Main stylesheet and color file-->
   <link href="assets/css/style.css" rel="stylesheet" />
   <link id="color-scheme" href="assets/css/colors/default.css" rel="stylesheet" />
@@ -65,50 +66,7 @@
 
       <section class="module-alternate">
         <div class="container">
-          <ul class="works-grid works-grid-masonry works-hover-w works-grid-3" id="works-grid" style="position: relative; height: 564.891px;">
-            <li class="work-item illustration webdesign" style="position: absolute; left: 0px; top: 0px;"><a href="portfolio_single_featured_image1.html">
-                <div class="work-image"><img src="assets/images/portfolio/masonry-portfolio1.jpg" alt="Portfolio Item"></div>
-                <div class="work-caption font-alt">
-                  <h3 class="work-title">Corporate Identity</h3>
-                  <div class="work-descr">Illustration</div>
-                </div></a></li>
-            <li class="work-item marketing photography" style="position: absolute; left: 312px; top: 0px;"><a href="portfolio_single_featured_image2.html">
-                <div class="work-image"><img src="assets/images/portfolio/masonry-portfolio2.jpg" alt="Portfolio Item"></div>
-                <div class="work-caption font-alt">
-                  <h3 class="work-title">Bag MockUp</h3>
-                  <div class="work-descr">Marketing</div>
-                </div></a></li>
-            <li class="work-item illustration photography" style="position: absolute; left: 624px; top: 0px;"><a href="portfolio_single_featured_slider1.html">
-                <div class="work-image"><img src="assets/images/portfolio/masonry-portfolio3.jpg" alt="Portfolio Item"></div>
-                <div class="work-caption font-alt">
-                  <h3 class="work-title">Disk Cover</h3>
-                  <div class="work-descr">Illustration</div>
-                </div></a></li>
-            <li class="work-item marketing photography" style="position: absolute; left: 312px; top: 208px;"><a href="portfolio_single_featured_slider2.htmll">
-                <div class="work-image"><img src="assets/images/portfolio/masonry-portfolio4.jpg" alt="Portfolio Item"></div>
-                <div class="work-caption font-alt">
-                  <h3 class="work-title">Business Card</h3>
-                  <div class="work-descr">Photography</div>
-                </div></a></li>
-            <li class="work-item illustration webdesign" style="position: absolute; left: 624px; top: 234px;"><a href="portfolio_single_featured_video1.html">
-                <div class="work-image"><img src="assets/images/portfolio/masonry-portfolio5.jpg" alt="Portfolio Item"></div>
-                <div class="work-caption font-alt">
-                  <h3 class="work-title">Web Design</h3>
-                  <div class="work-descr">Webdesign</div>
-                </div></a></li>
-            <li class="work-item marketing webdesign" style="position: absolute; left: 0px; top: 312px;"><a href="portfolio_single_featured_video2.html">
-                <div class="work-image"><img src="assets/images/portfolio/masonry-portfolio6.jpg" alt="Portfolio Item"></div>
-                <div class="work-caption font-alt">
-                  <h3 class="work-title">New Product</h3>
-                  <div class="work-descr">Marketing</div>
-                </div></a></li>
-            <li class="work-item marketing webdesign" style="position: absolute; left: 312px; top: 415px;"><a href="portfolio_single_featured_image1.html">
-                <div class="work-image"><img src="assets/images/portfolio/masonry-portfolio7.jpg" alt="Portfolio Item"></div>
-                <div class="work-caption font-alt">
-                  <h3 class="work-title">New Product</h3>
-                  <div class="work-descr">Marketing</div>
-                </div></a></li>
-          </ul>
+          <div class="row multi-columns-row" id="gallery-container"></div>
         </div>
       </section>
       <div id="footer"></div>
@@ -132,9 +90,11 @@
   <script src="assets/lib/smoothscroll.js"></script>
   <script src="assets/lib/magnific-popup/dist/jquery.magnific-popup.js"></script>
   <script src="assets/lib/simple-text-rotator/jquery.simple-text-rotator.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
   <script src="assets/js/plugins.js"></script>
   <script src="assets/js/main.js"></script>
   <script src="hmnn-assets/bannerimage.js"></script>
+  <script src="hmnn-assets/gallery.js"></script>
   <script>
     $(function() {
       $("#navbar").load("navigation.html");
