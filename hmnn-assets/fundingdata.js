@@ -10,7 +10,7 @@ async function getData(url) {
         dataItem = json[i];
 
         if (dataItem.sheetIdentifier === "Grants") {
-            var $funding = $(`<h3 class="font-alt">${dataItem['Title']}</h3><h4 class="font-alt"><i class="fa fa-fw"></i>${dataItem['Agency']} &nbsp;&nbsp; <i class="fa fa-fw"></i>${dataItem['Duration']} &nbsp;&nbsp; <i class="fa fa-fw"></i>${dataItem['Amount']}</h4><h5 class="font-alt">${dataItem['Summary']}</h5>`);
+            var $funding = $(`<h3 class="font-alt" style="color: black; font-size: 1.2em;">${dataItem['Title']}</h3><h4 class="font-alt"><i class="fa fa-fw"></i>&nbsp;${dataItem['Agency']} &nbsp;&nbsp; <i class="fa fa-fw"></i>&nbsp;${dataItem['Duration']} &nbsp;&nbsp; <i class="fa fa-fw"></i>&nbsp;${dataItem['Amount']} &nbsp;&nbsp; Role: ${dataItem['Role']}</h4>`);
             $('#funding-list').append($funding);
         } else if (dataItem.sheetIdentifier === "Funding Agencies") {
             var $galleryItem = $(`<div class="col-sm-6 col-md-3 col-lg-3"><a href="${dataItem['Website']}" target="_blank"><img src="${dataItem['LogoPath']}" alt="${dataItem['Title']} Logo"></a></div>`);

@@ -4,8 +4,12 @@ async function getData(url) {
         const data = await response.json();
         console.log(data);
 
-        // Sort the gallery items based on the title (year) in descending order
-        const sortedGalleryItems = data.galleryItems.sort((a, b) => parseInt(b.Year) - parseInt(a.Year));
+        // Sort the gallery items based on month and year
+        const sortedGalleryItems = data.galleryItems.sort((a, b) => {
+            const dateA = new Date(parseDateString(a.Year));
+            const dateB = new Date(parseDateString(b.Year));
+            return dateB - dateA;
+        });
 
         for (let i = 0; i < sortedGalleryItems.length; i++) {
             const item = sortedGalleryItems[i];
@@ -18,13 +22,35 @@ async function getData(url) {
     }
 }
 
+function parseDateString(dateString) {
+    // Convert month names to numbers and remove non-alphanumeric characters
+    const formattedDate = dateString.replace(/[^a-zA-Z0-9]/g, '');
+    const monthNames = [
+        'January', 'February', 'March', 'April',
+        'May', 'June', 'July', 'August',
+        'September', 'October', 'November', 'December'
+    ];
+    
+    const monthIndex = monthNames.findIndex(month => formattedDate.toLowerCase().includes(month.toLowerCase()));
+    
+    if (monthIndex !== -1) {
+        const month = monthIndex + 1; // Months are zero-based in JavaScript Date object
+        const year = formattedDate.replace(/[^\d]/g, '');
+        return `${month}/${year}`;
+    }
+
+    return formattedDate;
+}
+
+// Rest of your code remains unchanged
+
 function createGalleryItem(item) {
     const galleryItem = `
         <div class="col-sm-6 col-md-3 col-lg-3">
             <div class="gallery-item">
                 <div class="gallery-image">
                     <a class="gallery" href="${item.ImagePath}" data-lightbox="gallery" data-title="${item.Year}">
-                        <img src="${item.ThumbnailPath}" alt="Gallery Image"/>
+                        <img src="${item.ImagePath}" alt="Gallery Image"/>
                         <div class="gallery-caption">
                             <div class="gallery-icon"><span class="icon-magnifying-glass"></span></div>
                         </div>

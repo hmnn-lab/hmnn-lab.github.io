@@ -4,23 +4,35 @@ async function getData(url) {
 
     const json = JSON.parse(y);
 
-    // Group publications by affiliation and then by year
+    // Group publications by affiliation, year, and month
     const publicationsByAffiliation = groupPublicationsByAffiliation(json);
 
-    // Sort affiliations based on the latest year
+    // Sort affiliations based on the latest year and month
     const sortedAffiliations = Object.keys(publicationsByAffiliation).sort((a, b) => {
-        const maxYearA = Math.max(...Object.keys(publicationsByAffiliation[a]));
-        const maxYearB = Math.max(...Object.keys(publicationsByAffiliation[b]));
+        if (a === 'Others') return 1;
+        if (b === 'Others') return -1;
+
+        const maxYearA = Math.max(...Object.keys(publicationsByAffiliation[a]).map(year => parseInt(year)));
+        const maxYearB = Math.max(...Object.keys(publicationsByAffiliation[b]).map(year => parseInt(year)));
         return maxYearB - maxYearA;
     });
 
-    const $gridContainer = $('#publications-list');
+    const $gridContainer = $('#outreach-list');
 
     sortedAffiliations.forEach((affiliation, affiliationIndex) => {
         const affiliationPublications = publicationsByAffiliation[affiliation];
         const $affiliationContainer = $(`<div class="well well-sm"><h3 class="font-alt text-center" style="margin-top: 0;"><strong>${affiliation}</strong></h3></div>`);
 
         $gridContainer.append($affiliationContainer);
+
+        if (affiliation === 'Other') {
+            const publications = affiliationPublications['Others'];
+            publications.forEach(pub => {
+                const $publication = createPublicationElement(pub);
+                $affiliationContainer.append($publication);
+            });
+            return; // Skip sorting and handling 'Others' category
+        }
 
         const years = Object.keys(affiliationPublications).sort((a, b) => b - a);
 
@@ -35,14 +47,7 @@ async function getData(url) {
                 $publicationsContainer.hide();
             }
 
-            // Sort months in descending order
-            const months = Object.keys(affiliationPublications[year]).sort((a, b) => {
-                const monthOrder = [
-                    'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'
-                ];
-
-                return monthOrder.indexOf(b) - monthOrder.indexOf(a);
-            });
+            const months = Object.keys(affiliationPublications[year]).sort((a, b) => b - a);
 
             months.forEach(month => {
                 const publications = affiliationPublications[year][month];
@@ -94,26 +99,22 @@ function groupPublicationsByAffiliation(json) {
 }
 
 
-function extractYearFromCitation(citation) {
-    const match = citation.match(/\((\d{4})\)/);
-    if (match) {
-        return parseInt(match[1]);
-    }
-    return null;
-}
 
-function groupPublicationsByYear(json) {
-    const publicationsByYear = {};
-    json.forEach(pub => {
-        const year = pub['YEAR'];
-        if (year) {
-            if (!publicationsByYear[year]) {
-                publicationsByYear[year] = [];
-            }
-            publicationsByYear[year].push(pub);
-        }
-    });
-    return publicationsByYear;
+
+function parseMonth(monthYear) {
+    const monthNames = [
+        'January', 'February', 'March', 'April', 'May', 'June',
+        'July', 'August', 'September', 'October', 'November', 'December'
+    ];
+
+    const [month, year] = monthYear.split(/(?=\d)/);
+    const monthIndex = monthNames.indexOf(month);
+
+    if (monthIndex !== -1 && year) {
+        return monthIndex;
+    }
+
+    return 0;
 }
 
 function createPublicationElement(pub) {
@@ -121,41 +122,19 @@ function createPublicationElement(pub) {
     let citText = pub['CITATION'];
     let title = pub['TITLE'];
 
-    // Escape special characters in the title for regular expression
     const escapedTitle = title.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     
-    // Search for the escaped title in the citText and wrap it with <b> tags
     let modifiedcit = citText.replace(new RegExp(escapedTitle, 'g'), `<b>${title}</b>`);
 
-
-    if (pub.hasOwnProperty('PDF') && pub['PDF'] !== "") {
-        $publication = $(`
-            <div class="grid-item font-alt" style="padding-left: 20px;">
-                <h4 style="color: black; margin-bottom: 0;">${modifiedcit}</h4>
-                <h4 style="margin-top: 0;">
-                    <a href="https://doi.org/${pub['DOI']}" target="_blank">${pub['DOI']}</a>&nbsp;&nbsp;
-                    <a href="${pub['PDF']}" target="_blank">
-                        <img width="20" height="20" src="hmnn-assets/icons/pdf-48.png" style="margin-bottom: 5px;" />
-                    </a>
-                </h4>
-            </div>
-        `);
-    } else {
-        $publication = $(`
-            <div class="grid-item font-alt" style="padding-left: 20px;">
-                <h4 style="color: black; margin-bottom: 0;">${modifiedcit}</h4>
-                <h4 style="margin-top: 0;">
-                    <a href="https://doi.org/${pub['DOI']}" target="_blank">${pub['DOI']}</a>
-                </h4>
-            </div>
-        `);
-    }
+    $publication = $(`
+        <div class="grid-item font-alt" style="padding-left: 20px;">
+            <h4 style="color: black; margin-bottom: 0;">${modifiedcit}</h4>
+        </div>
+    `);
 
     return $publication;
 }
 
-
-
 $(window).on('load', function () {
-    getData("https://script.google.com/macros/s/AKfycbyiEeDS64SrjXGGAcxcmiPGpt_2G3CxlL-89yqPxXQbbe-Bp-pOSk3ULjd2O3eumm_b/exec");
-})
+    getData("https://script.google.com/macros/s/AKfycbyQM1TTeXRoMwYa1wWfYgsgbRibtweMcwvEs8SV6ACV66QHPz-EktsgGP-lO24NKKq2/exec");
+});
