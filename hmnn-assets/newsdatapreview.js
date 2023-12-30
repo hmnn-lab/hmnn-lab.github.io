@@ -5,11 +5,10 @@ async function getPreviewData(url, count) {
   let json = JSON.parse(y);
 
   json = json.sort((a, b) => {
-    // Convert and sort based on the 'Date' field in descending order
-    let dateA = convertToDate(a['Date']);
-    let dateB = convertToDate(b['Date']);
+    const dateA = new Date(parseDate(a['Date']));
+    const dateB = new Date(parseDate(b['Date']));
     return dateB - dateA;
-  });
+});
 
   console.log(json);
 
@@ -30,13 +29,12 @@ async function getPreviewData(url, count) {
   }
 }
 
-function convertToDate(dateString) {
-  const [day, month, year] = dateString.split('.');
-  const formattedDate = `${year}-${month}-${day}`;
-  
-  // Explicitly specify the date format
-  const formatter = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'numeric', day: 'numeric' });
-  return new Date(formatter.format(new Date(formattedDate)));
+function parseDate(dateString) {
+  const parts = dateString.split('.');
+  if (parts.length === 3) {
+      return `${parts[1]}.${parts[0]}.${parts[2]}`;
+  }
+  return dateString;
 }
 
 $(window).on('load', function () {
