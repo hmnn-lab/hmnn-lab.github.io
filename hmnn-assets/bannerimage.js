@@ -15,11 +15,8 @@ function updateBackgroundImage() {
   }
 }
 
-// Call the function when the page loads and trigger resize event to set initial background image
-window.addEventListener('load', function() {
-  updateBackgroundImage();
-  window.dispatchEvent(new Event('resize'));
-});
-
-// Call the function when the window is resized
+// Trigger the function when the window is resized
 window.addEventListener('resize', updateBackgroundImage);
+
+// Trigger the function on page load
+window.onload = updateBackgroundImage;

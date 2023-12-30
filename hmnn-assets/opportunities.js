@@ -4,7 +4,6 @@ async function fetchData() {
   const data = await response.json();
   return data;
 }
-
 // Function to create HTML elements for each highlighted banner
 // Function to create HTML elements for each highlighted banner
 // Function to create HTML elements for each highlighted banner
@@ -111,4 +110,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   renderHighlightedBanners(data.HighlightedBanners);
   renderOpportunities(data.OpportunitiesContents);
   renderOverallDescription(data.OverallDescription);
+  $('.loader').fadeOut();
+  $('.page-loader').delay(350).fadeOut('slow');
 });

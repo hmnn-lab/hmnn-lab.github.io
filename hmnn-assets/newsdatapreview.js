@@ -31,13 +31,14 @@ async function getPreviewData(url, count) {
 }
 
 function convertToDate(dateString) {
-  const parts = dateString.split('.');
-  const year = parts[2];
-  const month = parts[1];
-  const day = parts[0];
-  return new Date(`${year}-${month}-${day}`);
+  const [day, month, year] = dateString.split('.');
+  const formattedDate = `${year}-${month}-${day}`;
+  
+  // Explicitly specify the date format
+  const formatter = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'numeric', day: 'numeric' });
+  return new Date(formatter.format(new Date(formattedDate)));
 }
 
-$(window).on('load', function() {
+$(window).on('load', function () {
   getPreviewData("https://script.google.com/macros/s/AKfycbzapnBe3PPmxDWml0YlmbtuyB3nceVUlXpqULjB-sRwJsUybbTqcnJdVevbLb705uyb/exec", 4);
 });

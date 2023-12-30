@@ -68,6 +68,8 @@ async function getData(url) {
             $expandIcon.css('transform', 'rotate(90deg)');
         }
     });
+    $('.loader').fadeOut();
+    $('.page-loader').delay(350).fadeOut('slow');
 }
 
 function parseDate(dateString) {

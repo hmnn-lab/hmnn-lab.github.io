@@ -21,6 +21,8 @@ async function getData(url) {
     // Add clearfix after every 4th item (adjust based on your layout)
     $('#gallery-container .col-md-3:nth-child(4n)').after('<div class="clearfix visible-md-block"></div>');
     $('#gallery-container .col-lg-3:nth-child(4n)').after('<div class="clearfix visible-lg-block"></div>');
+    $('.loader').fadeOut();
+    $('.page-loader').delay(350).fadeOut('slow');
 }
 
 $(window).on('load', function () {

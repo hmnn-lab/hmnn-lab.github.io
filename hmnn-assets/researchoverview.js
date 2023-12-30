@@ -55,6 +55,8 @@ async function getData(url) {
             // Append the section to the research list
             $('#research-list').append($section);
         }
+        $('.loader').fadeOut();
+        $('.page-loader').delay(350).fadeOut('slow');
     }
 }
 

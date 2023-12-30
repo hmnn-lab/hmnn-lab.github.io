@@ -30,6 +30,8 @@ async function getData(url) {
 
     // Initialize FlexSlider without specific options
     $('.hero-slider').flexslider();
+    $('.loader').fadeOut();
+    $('.page-loader').delay(350).fadeOut('slow');
 }
 
 $(window).on('load', function () {

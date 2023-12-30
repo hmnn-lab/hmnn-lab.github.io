@@ -120,4 +120,6 @@ $(window).on('load', async function () {
 
     createEventList(upcomingEvents, 'upcoming-events-container');
     createEventList(pastEvents, 'past-events-container');
+    $('.loader').fadeOut();
+    $('.page-loader').delay(350).fadeOut('slow');
 });

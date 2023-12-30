@@ -41,6 +41,8 @@ function renderResources(resources) {
     const resourcesElement = createResourcesElement(resource);
     resourcesList.appendChild(resourcesElement);
   });
+  $('.loader').fadeOut();
+  $('.page-loader').delay(350).fadeOut('slow');
 }
 
 // Fetch data and render content when the page loads

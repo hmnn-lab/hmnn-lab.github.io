@@ -12,6 +12,8 @@ async function loadContactData() {
     } catch (error) {
       console.error('Error loading contact data:', error);
     }
+    $('.loader').fadeOut();
+    $('.page-loader').delay(350).fadeOut('slow');
   }
   
   document.addEventListener('DOMContentLoaded', function () {

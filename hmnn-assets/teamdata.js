@@ -91,6 +91,8 @@ async function getData(url) {
             itemSelector: '.work-item'
         });
     });
+    $('.loader').fadeOut();
+    $('.page-loader').delay(350).fadeOut('slow');
 }
 
 function checkIfProfile() {

@@ -17,6 +17,8 @@ async function getData(url) {
             let galleryItem = createGalleryItem(item);
             $('#gallery-container').append(galleryItem);
         }
+        $('.loader').fadeOut();
+        $('.page-loader').delay(350).fadeOut('slow');
     } catch (error) {
         console.error("Error fetching gallery data:", error);
     }
