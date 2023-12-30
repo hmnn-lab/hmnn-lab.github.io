@@ -130,7 +130,7 @@ function createPublicationElement(pub) {
 
     $publication = $(`
         <div class="grid-item font-alt" style="padding-left: 20px;">
-            <h4 style="color: black; margin-bottom: 0;">${modifiedcit}</h4>
+            <h4 style="margin-bottom: 0;">${modifiedcit}</h4>
         </div>
     `);
 

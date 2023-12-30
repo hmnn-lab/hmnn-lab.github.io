@@ -941,7 +941,6 @@ a,
 
 .news-content {
     flex: 1 1 auto;
-    color: black;
 }
 /* Add a media query for smaller screens */
 @media (max-width: 767px) {

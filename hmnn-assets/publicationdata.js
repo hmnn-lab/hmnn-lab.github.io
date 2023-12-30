@@ -133,7 +133,7 @@ function createPublicationElement(pub) {
     if (pub.hasOwnProperty('PDF') && pub['PDF'] !== "") {
         $publication = $(`
             <div class="grid-item font-alt" style="padding-left: 20px;">
-                <h4 style="color: black; margin-bottom: 0;">${modifiedcit}</h4>
+                <h4 style="margin-bottom: 0;">${modifiedcit}</h4>
                 <h4 style="margin-top: 0;">
                     <a href="https://doi.org/${pub['DOI']}" target="_blank">${pub['DOI']}</a>&nbsp;&nbsp;
                     <a href="${pub['PDF']}" target="_blank">
@@ -145,7 +145,7 @@ function createPublicationElement(pub) {
     } else {
         $publication = $(`
             <div class="grid-item font-alt" style="padding-left: 20px;">
-                <h4 style="color: black; margin-bottom: 0;">${modifiedcit}</h4>
+                <h4 style="margin-bottom: 0;">${modifiedcit}</h4>
                 <h4 style="margin-top: 0;">
                     <a href="https://doi.org/${pub['DOI']}" target="_blank">${pub['DOI']}</a>
                 </h4>

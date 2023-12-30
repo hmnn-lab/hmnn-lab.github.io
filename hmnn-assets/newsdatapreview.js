@@ -8,7 +8,7 @@ async function getPreviewData(url, count) {
     const dateA = new Date(parseDate(a['Date']));
     const dateB = new Date(parseDate(b['Date']));
     return dateB - dateA;
-});
+  });
 
   console.log(json);
 
@@ -16,6 +16,21 @@ async function getPreviewData(url, count) {
     let newsall = json[i];
     let newsText = newsall['News'];
     let mainSubject = newsall['Main Subject'];
+
+    // Check if URLTagText and URL are present
+    if (newsall['URLTagText'] && newsall['URL']) {
+      // Search for URLTagText in the News column
+      const linkPattern = new RegExp(newsall['URLTagText'], 'g');
+      const matchedLinks = newsText.match(linkPattern);
+      if (matchedLinks) {
+        // If found, create links for each match
+        matchedLinks.forEach(matchedLink => {
+          const url = newsall['URL'];
+          const $link = $(`<a href="${url}" target="_blank">${matchedLink}</a>`);
+          newsText = newsText.replace(matchedLink, $link.prop('outerHTML'));
+        });
+      }
+    }
 
     // Search for the mainSubject in the newsText and wrap it with <b> tags
     let modifiedNews = newsText.replace(new RegExp(mainSubject, 'g'), `<b>${mainSubject}</b>`);
@@ -28,6 +43,8 @@ async function getPreviewData(url, count) {
     $('#news-preview').append($newsText);
   }
 }
+
+
 
 function parseDate(dateString) {
   const parts = dateString.split('.');
