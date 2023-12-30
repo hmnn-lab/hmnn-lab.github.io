@@ -15,8 +15,11 @@ function updateBackgroundImage() {
   }
 }
 
-// Trigger the function when the window is resized
-window.addEventListener('resize', updateBackgroundImage);
+// Call the function when the page is fully loaded
+window.onload = function() {
+  // Introduce a delay to ensure the styles are applied after the image is loaded
+  setTimeout(updateBackgroundImage, 100);
+};
 
-// Trigger the function on page load
-window.onload = updateBackgroundImage;
+// Call the function when the window is resized
+window.addEventListener('resize', updateBackgroundImage);
