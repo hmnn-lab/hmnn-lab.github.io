@@ -36,22 +36,25 @@
   .nav__wrapper {
     display: flex; } }
 
-@media (max-width: 1109px) {
-  .nav__wrapper {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    left: 0;
-    z-index: -1;
-    background-color: black;
-    visibility: hidden;
-    opacity: 0;
-    transform: translateY(-100%);
-    transition: transform 0.3s ease-out, opacity 0.3s ease-out; }
+  @media (max-width: 1109px) {
+    .nav__wrapper {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      left: 0;
+      z-index: -1;
+      background-color: black;
+      visibility: hidden;
+      opacity: 0;
+      transform: translateY(-100%);
+      transition: transform 0.3s ease-out; /* Remove opacity from the transition */
+    }
     .nav__wrapper.active {
       visibility: visible;
       opacity: 1;
-      transform: translateY(0); } }
+      transform: translateY(0);
+    }
+  }
 
 .nav ul {
   list-style-type: none;

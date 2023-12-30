@@ -11,8 +11,11 @@ async function getData(url) {
 
     people = JSON.parse(y);
 
+    const categoriesWithProfiles = [];
+
     for (let i = 0; i < Object.keys(people).length; i++) {
-        person = people[i];
+        const person = people[i];
+        categoriesWithProfiles.push(person['WebClass']);
 
         var persondata_string = `<li class="work-item ${person['WebClass']}" id="undefined" style="position: absolute; left: 0px; top: 0px;">
                 <a onclick="showProfile('${person['Tag']}')">`
@@ -91,6 +94,17 @@ async function getData(url) {
             itemSelector: '.work-item'
         });
     });
+
+    const uniqueCategories = [...new Set(categoriesWithProfiles)];
+
+    // Loop through categories and hide those without profiles
+    $(".filter li").each(function () {
+        const category = $(this).find('a').data('filter').substring(1); // Remove the dot (.) from the data-filter value
+        if (!uniqueCategories.includes(category)) {
+            $(this).hide();
+        }
+    });
+
     $('.loader').fadeOut();
     $('.page-loader').delay(350).fadeOut('slow');
 }
