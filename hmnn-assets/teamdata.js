@@ -1,4 +1,5 @@
 let people;
+let scrollPosition = 0;
 
 
 $(window).on('load', function() {
@@ -118,9 +119,11 @@ function checkIfProfile() {
 function closeProfile() {
     document.querySelector("#show-profile").style.display = 'none';
     document.querySelector("#works-grid").style.display = 'block';
+    window.scrollTo(0, scrollPosition);
 }
 
 function showProfile(personname) {
+    scrollPosition = window.scrollY;
     document.querySelector('#filters').scrollIntoView();
     document.querySelector("#works-grid").style.display = 'none';
     document.querySelector("#show-profile").style.display = 'block';

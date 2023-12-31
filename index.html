@@ -138,43 +138,51 @@
           $("#navbar").load("navigation.html"); 
           });
     </script>
-    <script> 
+    <script>
       $(function(){
-        $("#footer").load("footer.html"); 
+        $("#footer").load("footer.html", function() {
+          // Dynamically insert the additional line
+          var additionalLine = document.createElement("p");
+          additionalLine.className = "additional-line font-alt text-center";
+          additionalLine.innerHTML = "Website designed and developed by Sainath Murali and Anway Pimpalkar";
+    
+          // Append the additional line to the container
+          document.getElementById("additional-line-container").appendChild(additionalLine);
+        });
+      });
+    </script>    
+    <script>
+      $(document).ready(function() {
+        // Function to update section height based on page width
+        function updateSectionHeight() {
+          var pageWidth = $(window).width();
+          if (pageWidth > 1200) {
+            $('.home-section').css('height', '1061px');
+          } else if (pageWidth > 500 && pageWidth <= 1200) {
+            $('.home-section').css('height', 1061 + 200 - (1400 - pageWidth));
+          } else if (pageWidth <= 500) {
+            $('.home-section').css('height', 1061 + 200 - (1400 - 500));
+          }
+        }
+
+        // Initial update on page load
+        updateSectionHeight();
+
+        // Update on page resize
+        $(window).on('resize', function() {
+          updateSectionHeight();
+        });
+
+        // Update on page scroll (debounced for performance)
+        var debounceTimeout;
+        $(window).on('scroll', function() {
+          clearTimeout(debounceTimeout);
+          debounceTimeout = setTimeout(function() {
+            updateSectionHeight();
+          }, 250);
+        });
       });
     </script>
-<script>
-  $(document).ready(function() {
-    // Function to update section height based on page width
-    function updateSectionHeight() {
-      var pageWidth = $(window).width();
-      if (pageWidth > 1200) {
-        $('.home-section').css('height', '1061px');
-      } else if (pageWidth > 500 && pageWidth <= 1200) {
-        $('.home-section').css('height', 1061 + 200 - (1400 - pageWidth));
-      } else if (pageWidth <= 500) {
-        $('.home-section').css('height', 1061 + 200 - (1400 - 500));
-      }
-    }
-
-    // Initial update on page load
-    updateSectionHeight();
-
-    // Update on page resize
-    $(window).on('resize', function() {
-      updateSectionHeight();
-    });
-
-    // Update on page scroll (debounced for performance)
-    var debounceTimeout;
-    $(window).on('scroll', function() {
-      clearTimeout(debounceTimeout);
-      debounceTimeout = setTimeout(function() {
-        updateSectionHeight();
-      }, 250);
-    });
-  });
-</script>
 
   </body>
 </html>
