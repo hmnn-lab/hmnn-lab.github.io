@@ -2,11 +2,18 @@ let people;
 let scrollPosition = 0;
 
 
-$(window).on('load', function() {
-    getData("https://script.google.com/macros/s/AKfycbwMZdsa4fz3xGy9MibJxs8e4tjSCTE8UHmTCgOVL9y8PbEO2bHj4LLFsa54R04MmPHk/exec");
-})
+$(document).ready(function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const personTag = urlParams.get('tag');
 
-async function getData(url) {
+    if (personTag) {
+        getData("https://script.google.com/macros/s/AKfycbwMZdsa4fz3xGy9MibJxs8e4tjSCTE8UHmTCgOVL9y8PbEO2bHj4LLFsa54R04MmPHk/exec", personTag);
+    } else {
+        getData("https://script.google.com/macros/s/AKfycbwMZdsa4fz3xGy9MibJxs8e4tjSCTE8UHmTCgOVL9y8PbEO2bHj4LLFsa54R04MmPHk/exec");
+    }
+});
+
+async function getData(url, selectedTag) {
     let x = await fetch(url);
     let y = await x.text();
 
@@ -105,7 +112,12 @@ async function getData(url) {
             $(this).hide();
         }
     });
-
+    if (selectedTag) {
+        const selectedPerson = people.find(e => e['Tag'] === selectedTag);
+        if (selectedPerson) {
+            showProfile(selectedPerson['Tag']);
+        }
+    }
     $('.loader').fadeOut();
     $('.page-loader').delay(350).fadeOut('slow');
 }
@@ -120,7 +132,21 @@ function closeProfile() {
     document.querySelector("#show-profile").style.display = 'none';
     document.querySelector("#works-grid").style.display = 'block';
     window.scrollTo(0, scrollPosition);
+
+    // Clear the content inside the show-profile element
+    document.querySelector("#show-profile").innerHTML = '';
+
+    // Destroy the Isotope layout
+    $('#works-grid').isotope('destroy');
+    
+    // Reinitialize the Isotope layout
+    $('#works-grid').imagesLoaded(function() {
+        $('#works-grid').isotope({
+            itemSelector: '.work-item'
+        });
+    });
 }
+
 
 function showProfile(personname) {
     scrollPosition = window.scrollY;

@@ -102,9 +102,6 @@ function createEventList(eventData, containerId) {
     });
 }
 
-// Rest of your code remains unchanged
-
-
 
 
 

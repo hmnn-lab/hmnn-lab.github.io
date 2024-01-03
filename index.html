@@ -36,6 +36,7 @@
     <link href="assets/lib/owl.carousel/dist/assets/owl.theme.default.min.css" rel="stylesheet">
     <link href="assets/lib/magnific-popup/dist/magnific-popup.css" rel="stylesheet">
     <link href="assets/lib/simple-text-rotator/simpletextrotator.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" integrity="sha256-4Y8klEO+Uj1Q9to3nLQQ2TuoQ7R4wvTyZ1l31a59nrk=" crossorigin="anonymous" />
     <!-- Main stylesheet and color file-->
     <link href="assets/css/style.css" rel="stylesheet">
     <link id="color-scheme" href="assets/css/colors/default.css" rel="stylesheet">
@@ -59,8 +60,7 @@
           <div class="container">
             <div class="row">
               <div class="col-sm col">
-                <h2 class="module-title font-alt" style="text-align: center;">Welcome to HMNN Lab</h2>
-                <div class="module-subtitle font-serif" style="margin-bottom: 0px; margin-top:10px;" id="introtext"></div>
+                <div class="module-subtitle" style="margin-bottom: 0px; margin-top:10px;" id="introtext"></div>
                 <div class="alt-features-item4" style="margin-bottom: 50px;">
                   <a href="research.html" class="btnnormal btn-primary" style="font-family: 'Open Sans', sans-serif; font-size: 15px; text-align: center;">Learn more about our Research</a>
                 </div>
@@ -144,7 +144,7 @@
           // Dynamically insert the additional line
           var additionalLine = document.createElement("p");
           additionalLine.className = "additional-line font-alt text-center";
-          additionalLine.innerHTML = "Website designed and developed by Sainath Murali and Anway Pimpalkar";
+          additionalLine.innerHTML = "Website designed and developed by <a href=people.html?tag=sainathmurali#pi>Sainath Murali</a> and <a href=people.html?tag=anwaypimpalkar#pi>Anway Pimpalkar</a>.";
     
           // Append the additional line to the container
           document.getElementById("additional-line-container").appendChild(additionalLine);

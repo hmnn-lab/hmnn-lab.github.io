@@ -20,7 +20,7 @@
   top: 0;
   z-index: 3;
   width: 100%;
-  background-color: black; }
+  background: linear-gradient(to bottom, #07161c, #305b6f) }
 
 .site-header__wrapper {
   padding-top: 1rem;

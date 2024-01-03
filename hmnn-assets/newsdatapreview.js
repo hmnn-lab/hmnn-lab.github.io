@@ -33,7 +33,17 @@ async function getPreviewData(url, count) {
     }
 
     // Search for the mainSubject in the newsText and wrap it with <b> tags
-    let modifiedNews = newsText.replace(new RegExp(mainSubject, 'g'), `<b>${mainSubject}</b>`);
+    let modifiedNews = newsall['PersonTag'] ?
+    newsText.replace(mainSubject, `<a href="people.html?tag=${newsall['PersonTag']}#pi"><b>${mainSubject}</b></a>`) :
+    newsText.replace(mainSubject, `<b>${mainSubject}</b>`);
+
+    // Check if GalleryTagText and GalleryTag are present
+    if (newsall['GalleryTagText'] && newsall['GalleryTag']) {
+      const galleryTagText = newsall['GalleryTagText'];
+      const galleryTag = newsall['GalleryTag'];
+      const galleryLink = `<a href="gallery.html?tag=${galleryTag}"><b>${galleryTagText}</b></a>`;
+      modifiedNews = modifiedNews.replace(new RegExp(galleryTagText, 'g'), galleryLink);
+    }
 
     let $newsText = $(`<div class="alt-features-item1">${modifiedNews} <b>(${newsall['Date']})</b></div>`);
 

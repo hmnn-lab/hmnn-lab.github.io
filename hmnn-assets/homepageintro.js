@@ -1,3 +1,4 @@
+let introText = '';
 async function getData(url) {
     let x = await fetch(url);
     let y = await x.text();
@@ -24,10 +25,15 @@ async function getData(url) {
 
         // If IntroText is available, set it to the #introtext element
         if (item.IntroText) {
-            $('#introtext').text(item.IntroText);
+            introText = item.IntroText;
+        }
+        // Check if IntroTextHighlight exists
+        if (item.IntroTextHighlight) {
+            // Append IntroTextHighlight with increased font size and bold
+            introText = '<h4 style="font-size: 1.2em;"><b>' + item.IntroTextHighlight + '</b></h4> ' + introText;
         }
     }
-
+    $('#introtext').html(introText);
     // Initialize FlexSlider without specific options
     $('.hero-slider').flexslider();
     $('.loader').fadeOut();

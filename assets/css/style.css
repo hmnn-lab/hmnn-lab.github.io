@@ -231,6 +231,10 @@ a,
   margin: 0;
 }
 
+.divider-d1 {
+  border-top: 1px solid #202020;
+}
+
 /* Half-image */
 .side-image {
   position: absolute;
@@ -268,7 +272,7 @@ a,
 }
 
 .bg-dark {
-  background: #111;
+  background: linear-gradient(to bottom,#305b6f, #07161c);
 }
 
 .bg-dark-30:before {
@@ -330,7 +334,7 @@ a,
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to left, rgba(169, 169, 169, 0), rgba(0, 0, 0, 0.8));
+  background: linear-gradient(to right, #00354bc2, #27465300);
 }
 
 
@@ -840,7 +844,7 @@ a,
 }
 
 .btn-primary {
-  background-color: black  !important;
+  background: radial-gradient(circle, #498ba9 0%, #305b6f 70%, #07161c 100%);
   border-color: black !important;
   
 }
@@ -994,13 +998,13 @@ a,
 }
 
 .rounded-box {
-  background-color: #5a5a5a; /* Change the background color as needed */
+  background: radial-gradient(circle, #498ba9 0%, #305b6f 70%, #07161c 100%); /* Change the background color as needed */
   border-radius: 10px; /* Adjust the border-radius value for the desired curvature */
-  padding: 10px; /* Add padding as needed */
+  padding: 10px; /* Add padding as needed */  
 }
 
 .rounded-box:hover {
-  background-color: #000000; /* Change the background color for the hover effect */
+  background: radial-gradient(circle, #498ba994 0%, #305b6f80 70%, #07161c 100%); /* Change the background color for the hover effect */
   /* Add any other styling you want for the hover effect, e.g., text color */
 }
 
@@ -1286,7 +1290,7 @@ Hero Slider
   }
 }
 section#about {
-  padding-top: 50px;
+  padding-top: 30px;
 }
 
 /* Adjust the padding-top for screens less than 1061px wide */
