@@ -47,7 +47,7 @@ async function getData(url) {
         if (newsItem['GalleryTagText'] && newsItem['GalleryTag']) {
           const galleryTagText = newsItem['GalleryTagText'];
           const galleryTag = newsItem['GalleryTag'];
-          const galleryLink = `<a href="gallery.html?tag=${galleryTag}"><b>${galleryTagText}</b></a>`;
+          const galleryLink = `<a href="gallery.html?tag=${galleryTag}"><span style="color:#498aa8"><b>${galleryTagText}</b></span></a>`;
           highlightedNews = highlightedNews.replace(new RegExp(galleryTagText, 'g'), galleryLink);
         }
 

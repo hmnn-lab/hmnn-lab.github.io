@@ -43,7 +43,7 @@
       right: 0;
       left: 0;
       z-index: -1;
-      background-color: black;
+      background: linear-gradient(to top, #07161c 30%, #305b6f);
       visibility: hidden;
       opacity: 0;
       transform: translateY(-100%);
@@ -90,7 +90,7 @@
   z-index: 7;
   position: absolute;
   margin-top: 0px;
-  background: #202020;
+  background: linear-gradient(to bottom, #07161c 30%, #305b6f);
   /* border-radius: 6px; */
   width: 150px;
   padding: 2px 2px;

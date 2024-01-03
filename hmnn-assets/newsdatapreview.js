@@ -41,7 +41,7 @@ async function getPreviewData(url, count) {
     if (newsall['GalleryTagText'] && newsall['GalleryTag']) {
       const galleryTagText = newsall['GalleryTagText'];
       const galleryTag = newsall['GalleryTag'];
-      const galleryLink = `<a href="gallery.html?tag=${galleryTag}"><b>${galleryTagText}</b></a>`;
+      const galleryLink = `<a href="gallery.html?tag=${galleryTag}"><span style="color:#498aa8"><b>${galleryTagText}</b></span></a>`;
       modifiedNews = modifiedNews.replace(new RegExp(galleryTagText, 'g'), galleryLink);
     }
 

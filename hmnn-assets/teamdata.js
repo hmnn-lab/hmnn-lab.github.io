@@ -115,7 +115,7 @@ async function getData(url, selectedTag) {
     if (selectedTag) {
         const selectedPerson = people.find(e => e['Tag'] === selectedTag);
         if (selectedPerson) {
-            showProfile(selectedPerson['Tag']);
+            showProfile(selectedPerson['Tag'], true);
         }
     }
     $('.loader').fadeOut();
@@ -132,23 +132,14 @@ function closeProfile() {
     document.querySelector("#show-profile").style.display = 'none';
     document.querySelector("#works-grid").style.display = 'block';
     window.scrollTo(0, scrollPosition);
+}
 
-    // Clear the content inside the show-profile element
-    document.querySelector("#show-profile").innerHTML = '';
-
-    // Destroy the Isotope layout
-    $('#works-grid').isotope('destroy');
-    
-    // Reinitialize the Isotope layout
-    $('#works-grid').imagesLoaded(function() {
-        $('#works-grid').isotope({
-            itemSelector: '.work-item'
-        });
-    });
+function closeProfile_tag() {
+    window.history.back();
 }
 
 
-function showProfile(personname) {
+function showProfile(personname, persontag=false) {
     scrollPosition = window.scrollY;
     document.querySelector('#filters').scrollIntoView();
     document.querySelector("#works-grid").style.display = 'none';
@@ -156,17 +147,30 @@ function showProfile(personname) {
 
     person = people.find(e => e['Tag'] === personname);
 
-    
-    var profiledata = `
-            <section class='FlexContainer'>
-                <div>
-                    <img onclick="closeProfile()" src="hmnn-assets/icons/close-50.svg"
-                        style="width=30; float: right; position:relative; cursor: pointer; z-index: 2" />
-                </div>
-            </section>
-            <div class="person-profile">
-                <div class="person-profile-left">
-                    <div class="work-image">`
+    if (persontag) {
+        scrollPosition = 0;
+        var profiledata = `
+        <section class='FlexContainer'>
+            <div>
+                <img onclick="closeProfile_tag()" src="hmnn-assets/icons/close-50.svg"
+                    style="width=30; float: right; position:relative; cursor: pointer; z-index: 2" />
+            </div>
+        </section>
+        <div class="person-profile">
+            <div class="person-profile-left">
+                <div class="work-image">`
+    } else {
+        var profiledata = `
+                <section class='FlexContainer'>
+                    <div>
+                        <img onclick="closeProfile()" src="hmnn-assets/icons/close-50.svg"
+                            style="width=30; float: right; position:relative; cursor: pointer; z-index: 2" />
+                    </div>
+                </section>
+                <div class="person-profile">
+                    <div class="person-profile-left">
+                        <div class="work-image">`
+    }
 
     if (person.hasOwnProperty("Photo") && person['Photo'] != "") {
         profiledata += `<img src="${person['Photo']}" class="profile-photo" alt="${person['Name']}">`
