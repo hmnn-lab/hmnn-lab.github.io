@@ -253,6 +253,7 @@ a,
 
 /* Dark background */
 .bg-dark,
+.bg-dark-20,
 .bg-dark-30,
 .bg-dark-60,
 .bg-dark-90,
@@ -278,6 +279,15 @@ a,
 .bg-dark-30:before {
   position: absolute;
   background: rgba(2, 2, 2, 0.4);
+  content: " ";
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+}
+.bg-dark-20:before {
+  position: absolute;
+  background: rgba(2, 2, 2, 0.075);
   content: " ";
   height: 100%;
   width: 100%;
@@ -1273,25 +1283,25 @@ Hero Slider
   -o-background-size: cover;
 }
 
-@media (min-width: 1429px) {
+/* @media (min-width: 1429px) {
   section#home .hero-slider .slides li {
-    background-position-y: 10px; /* Move the background image down by 100px */
+    background-position-y: 10px;
   }
-}
+} 
 
 @media (max-width: 1200px) {
   section#home .hero-slider .slides li {
-    background-position-y: 60px; /* Move the background image down by 100px */
+    background-position-y: 60px; 
   }
 }
 @media (max-width: 850px) {
   section#home .hero-slider .slides li {
-    background-position-y: 100px; /* Move the background image down by 100px */
+    background-position-y: 100px; 
   }
 }
 section#about {
   padding-top: 30px;
-}
+}*/
 
 /* Adjust the padding-top for screens less than 1061px wide */
 @media (max-width: 700px) {
