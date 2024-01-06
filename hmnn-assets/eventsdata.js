@@ -89,12 +89,22 @@ function createEventList(eventData, containerId) {
             // Append the work details to the container
             $container.append($workItem, $detailsContainer);
 
-            // Initialize FlexSlider (assuming you've included the FlexSlider library)
-            $sliderContainer.flexslider({
-                animation: "slide",
-                controlNav: true,
-                directionNav: true,
+            // Initialize Intersection Observer to start FlexSlider when scrolled into view
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        $sliderContainer.flexslider({
+                            animation: "slide",
+                            controlNav: true,
+                            directionNav: true,
+                        });
+                        observer.unobserve($workItem[0]);
+                    }
+                });
             });
+
+            // Observe the work item
+            observer.observe($workItem[0]);
         } else {
             // If no images, only append details container
             $container.append($detailsContainer);
