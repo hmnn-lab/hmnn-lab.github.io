@@ -1,13 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="refresh" content="0; url=https://hmnn-lab-fbc19.firebaseapp.com/">
+    <meta http-equiv="refresh" content="0; url=https://hmnn-lab.com/">
     <script type="text/javascript">
-        window.location.href = "https://hmnn-lab.com/"
+        window.onload = function() {
+            var currentUrl = window.location.href;
+            var newUrl = currentUrl.replace("https://hmnn-lab.github.io", "https://hmnn-lab.com");
+            window.location.href = newUrl;
+        }
     </script>
     <title>Page Redirection</title>
 </head>
 <body>
-    If you are not redirected automatically, follow this <a href="https://hmnn-lab-fbc19.firebaseapp.com/">link</a>.
+    If you are not redirected automatically, follow this <a id="redirect-link" href="https://hmnn-lab.com/">link</a>.
+    <script type="text/javascript">
+        document.getElementById("redirect-link").href = window.location.href.replace("https://hmnn-lab.github.io", "https://hmnn-lab.com");
+    </script>
 </body>
 </html>
