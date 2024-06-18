@@ -1,15 +1,37 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="refresh" content="0; url=https://hmnn-lab.com/">
     <script type="text/javascript">
         window.onload = function() {
-            var currentUrl = window.location.href;
-            if (currentUrl.includes("hmnn-lab.github.io")) {
-                var newUrl = currentUrl.replace("https://hmnn-lab.github.io", "https://hmnn-lab.com");
+            // Function to extract query parameters from a URL
+            function getQueryParams(url) {
+                var queryParams = {};
+                var params = url.substring(url.indexOf('?') + 1).split('&');
+                for (var i = 0; i < params.length; i++) {
+                    var pair = params[i].split('=');
+                    queryParams[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1]);
+                }
+                return queryParams;
+            }
+
+            // Capture the original requested URL (including path and query parameters)
+            var originalUrl = window.location.href;
+
+            // Define the old base URL and the new base URL
+            var oldBase = "https://hmnn-lab.github.io";
+            var newBase = "https://hmnn-lab.com";
+
+            // Check if the current URL starts with the old base URL
+            if (originalUrl.startsWith(oldBase)) {
+                // Extract path and query parameters
+                var pathAndQuery = originalUrl.substring(oldBase.length);
+                
+                // Redirect to the new URL with the same path and query parameters
+                var newUrl = newBase + pathAndQuery;
                 window.location.href = newUrl;
             } else {
-                window.location.href = "https://hmnn-lab.com";
+                // If the current URL does not start with the old base URL, redirect to the new base URL
+                window.location.href = newBase;
             }
         }
     </script>
@@ -17,12 +39,5 @@
 </head>
 <body>
     If you are not redirected automatically, follow this <a id="redirect-link" href="https://hmnn-lab.com/">link</a>.
-    <script type="text/javascript">
-        if (window.location.href.includes("hmnn-lab.github.io")) {
-            document.getElementById("redirect-link").href = window.location.href.replace("https://hmnn-lab.github.io", "https://hmnn-lab.com");
-        } else {
-            document.getElementById("redirect-link").href = "https://hmnn-lab.com";
-        }
-    </script>
 </body>
 </html>
