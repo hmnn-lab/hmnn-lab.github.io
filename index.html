@@ -4,12 +4,13 @@
     <meta http-equiv="refresh" content="0; url=https://hmnn-lab.com/">
     <script type="text/javascript">
         window.onload = function() {
-            // Capture the current URL
             var currentUrl = window.location.href;
-            // Replace the base part of the URL
-            var newUrl = currentUrl.replace("https://hmnn-lab.github.io", "https://hmnn-lab.com");
-            // Redirect to the new URL
-            window.location.href = newUrl;
+            if (currentUrl.includes("hmnn-lab.github.io")) {
+                var newUrl = currentUrl.replace("https://hmnn-lab.github.io", "https://hmnn-lab.com");
+                window.location.href = newUrl;
+            } else {
+                window.location.href = "https://hmnn-lab.com";
+            }
         }
     </script>
     <title>Page Redirection</title>
@@ -17,8 +18,11 @@
 <body>
     If you are not redirected automatically, follow this <a id="redirect-link" href="https://hmnn-lab.com/">link</a>.
     <script type="text/javascript">
-        // Update the link href in case JavaScript is available
-        document.getElementById("redirect-link").href = window.location.href.replace("https://hmnn-lab.github.io", "https://hmnn-lab.com");
+        if (window.location.href.includes("hmnn-lab.github.io")) {
+            document.getElementById("redirect-link").href = window.location.href.replace("https://hmnn-lab.github.io", "https://hmnn-lab.com");
+        } else {
+            document.getElementById("redirect-link").href = "https://hmnn-lab.com";
+        }
     </script>
 </body>
 </html>
