@@ -1,0 +1,36 @@
+---
+permalink: /404.html
+---
+
+<!DOCTYPE html>
+<html>
+<head>
+    <script type="text/javascript">
+        window.onload = function() {
+            // Capture the original requested URL (including path and query parameters)
+            var originalUrl = window.location.href;
+
+            // Define the old base URL and the new base URL
+            var oldBase = "https://hmnn-lab.github.io";
+            var newBase = "https://hmnn-lab.com";
+
+            // Check if the current URL starts with the old base URL
+            if (originalUrl.startsWith(oldBase)) {
+                // Extract path and query parameters
+                var pathAndQuery = originalUrl.substring(oldBase.length);
+
+                // Redirect to the new URL with the same path and query parameters
+                var newUrl = newBase + pathAndQuery;
+                window.location.href = newUrl;
+            } else {
+                // If the current URL does not start with the old base URL, redirect to the new base URL
+                window.location.href = newBase;
+            }
+        }
+    </script>
+    <title>Redirecting...</title>
+</head>
+<body>
+    <p>If you are not redirected automatically, <a href="https://hmnn-lab.com/">click here</a>.</p>
+</body>
+</html>
